@@ -1,6 +1,8 @@
 
 export default function IndexPage() {
   return (
-    <div>IndexPage</div>
+    <>
+        <h1>Inicio</h1>
+    </>
   )
 }
