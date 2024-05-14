@@ -9,6 +9,4 @@ export async function getCategories() {
     if(result.success){
         return result.data
     }
-
-    console.log(result)
 }
