@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from "react";
 import { NavLink, useLocation
         // Link 
 } from "react-router-dom"
@@ -18,6 +18,7 @@ export default function Header() {
     const isHome = useMemo(() => pathname === '/', [pathname]);
     const fethCategories = useAppStore((state) => state.fetchCategories);
     const {drinks} = useAppStore((state) => state.categories);
+    const searchRecipes = useAppStore((state) => state.searchRecipes);
 
     useEffect(()=>{
         fethCategories()
@@ -28,6 +29,19 @@ export default function Header() {
             ...searchFilters,
             [e.target.name] : e.target.value
         })
+    }
+
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        // TODO: validar
+        if(Object.values(searchFilters).includes('')){
+            console.log('Todos los campos son obligatorios');
+            return;
+        }
+
+        //Consultar las recetas
+        searchRecipes(searchFilters)
     }
 
   return (
@@ -45,7 +59,7 @@ export default function Header() {
             {isHome && (
                 <form
                     className="md:w-1/2 2xl:w-1/3 bg-orange-600 my-32 p-10 rounded-lg shadow-xl space-y-6"
-                    action=""
+                    onSubmit={handleSubmit}
                 >
                     <div className="space-y-4">
                         <label 
