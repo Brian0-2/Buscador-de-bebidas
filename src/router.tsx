@@ -3,6 +3,8 @@ import IndexPage from "./views/IndexPage";
 import FavoritePage from "./views/FavoritePage";
 import Layout from "./layouts/Layout";
 
+// npm i @headlessui/react
+
 export default function AppRouter() {
   return (
     <BrowserRouter>
