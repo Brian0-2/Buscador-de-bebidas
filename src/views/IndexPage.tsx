@@ -5,7 +5,6 @@ import DrinkCard from "../Components/DrinkCard";
 export default function IndexPage() {
 
  const drinks =  useAppStore((state) => state.drinks);
-
  const hasDrinks = useMemo(() => drinks.drinks.length > 0 , [drinks])
 
   useAppStore((state) => state.categories)

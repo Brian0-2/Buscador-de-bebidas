@@ -16,9 +16,12 @@ export default function Header() {
 
     //Destectar la pagina de inicio retorna true o false 
     const isHome = useMemo(() => pathname === '/', [pathname]);
+
+    //Funciones del state
     const fethCategories = useAppStore((state) => state.fetchCategories);
     const {drinks} = useAppStore((state) => state.categories);
     const searchRecipes = useAppStore((state) => state.searchRecipes);
+    const showNotification = useAppStore((state) => state.showNotification )
 
     useEffect(()=>{
         fethCategories()
@@ -36,7 +39,10 @@ export default function Header() {
 
         // TODO: validar
         if(Object.values(searchFilters).includes('')){
-            console.log('Todos los campos son obligatorios');
+            showNotification({
+                text: 'Todos los campos son obligatorios',
+                error: true
+            })
             return;
         }
 
